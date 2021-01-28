@@ -1,10 +1,10 @@
 import s from './index.module.css';
 
-function Layout ({id, title, descr, urlBg, colorBg = 'green'}) {
-  const rootStyle = {
-    backgroundColor: colorBg,
-    backgroundImage: `url(${urlBg})`
-  };
+function Layout ({id, title, descr, urlBg, colorBg}) {
+  const rootStyle = {};
+
+  if (colorBg) rootStyle.backgroundColor = colorBg;
+  if (urlBg) rootStyle.backgroundImage = `url(${urlBg})`;
 
   return (
     <section id={id} className={s.root} style={rootStyle}>
