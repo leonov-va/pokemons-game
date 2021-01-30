@@ -1,6 +1,6 @@
 import s from './index.module.css';
 
-function Layout ({id, title, descr, urlBg, colorBg}) {
+function Layout ({id, title, urlBg, colorBg, children}) {
   const rootStyle = {};
 
   if (colorBg) rootStyle.backgroundColor = colorBg;
@@ -15,7 +15,7 @@ function Layout ({id, title, descr, urlBg, colorBg}) {
             <span className={s.separator}></span>
           </div>
           <div className={`${s.desc} ${s.full}`}>
-            <p>{descr}</p>
+            {children}
           </div>
         </article>
       </div>
