@@ -2,13 +2,12 @@ import React from 'react';
 
 import './App.css';
 
-import Header from './components/Header/Header';
-import Layout from './components/Layout/Layout';
-import Footer from './components/Footer/Footer';
-import PokemonCard from './components/PokemonCard/PokemonCard';
+import Header from './components/Header';
+import Layout from './components/Layout';
+import Footer from './components/Footer';
+import PokemonCard from './components/PokemonCard';
 
 import urlBgForLayout from './assets/bg3.jpg';
-import cardBackSide from './assets/card-back-side.jpg';
 
 const POKEMONS = [
   {
@@ -164,7 +163,6 @@ function App () {
                 name={card.name}
                 values={card.values}
                 img={card.img}
-                imgBackSide={cardBackSide}
               />
             ))
           }
