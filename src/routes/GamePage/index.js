@@ -1,15 +1,18 @@
+import MenuHeader from '../../components/MenuHeader';
 import s from './index.module.css';
 
 function  GamePage ({onChangePage}) {
   const handleClick = () => {
-    // console.log('Game page!');
-    onChangePage && onChangePage();
+    onChangePage && onChangePage('app');
   };
 
   return (
     <>
-      <button onClick={handleClick}>&lt; Back to home page</button>
-      <h1>Game page</h1>
+      <MenuHeader bgActive={true} />
+      <div className={s.gamePage}>
+        <h1>Game page</h1>
+        <button onClick={handleClick}>&lt; Back to home page</button>
+      </div>
     </>
   )
 }

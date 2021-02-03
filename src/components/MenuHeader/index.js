@@ -4,17 +4,17 @@ import s from './index.module.css';
 import Menu from '../Menu';
 import Navbar from '../Navbar';
 
-function MenuHeader () {
-  const [isActive, setActive] = useState(false);
+function MenuHeader ({bgActive}) {
+  const [isOpen, setOpen] = useState(null);
 
-  const handleActive = () => {
-    setActive(!isActive);
+  const handleClickHamburg = () => {
+    setOpen(prevState => !prevState);
   };
 
   return (
     <>
-      <Menu isActive={isActive}/>
-      <Navbar isActive={isActive} changeActive={handleActive}/>
+      <Menu isOpen={isOpen}/>
+      <Navbar isOpen={isOpen} bgActive={bgActive} onClickHamburg={handleClickHamburg}/>
     </>
   )
 }

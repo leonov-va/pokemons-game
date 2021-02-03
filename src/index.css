@@ -33,3 +33,21 @@ a:hover,
 a:active {
     color: #f300b4;
 }
+
+button {
+    min-width: 200px;
+    height: 40px;
+    border: 1px solid transparent;
+    background-color: #f300b4;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    transition-property: border, background-color, color;
+    transition-duration: 300ms;
+}
+
+button:hover {
+    border-color: #f300b4;
+    background-color: transparent;
+    color: #f300b4;
+}

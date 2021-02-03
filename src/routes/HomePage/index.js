@@ -147,7 +147,6 @@ const POKEMONS = [
 
 function HomePage ({onChangePage}) {
   const handleClickButton = (page) => {
-    // console.log('Home page!');
     onChangePage && onChangePage(page);
   };
 

@@ -1,23 +1,26 @@
 import cn from 'classnames';
 import s from './index.module.css';
 
-function Menu ({isActive}) {
-  const menu = [
-    {title: 'HOME', url: '#welcome'},
-    {title: 'GAME', url: '#game'},
-    {title: 'ABOUT', url: '#about'},
-    {title: 'CONTACT', url: '#contact'},
+function Menu ({ isOpen }) {
+  const MENU = [
+    {title: 'HOME', to: '#welcome'},
+    {title: 'GAME', to: '#game'},
+    {title: 'ABOUT', to: '#about'},
+    {title: 'CONTACT', to: '#contact'},
   ];
 
   return (
-    <div className={cn(s.menuContainer, {[s.active]: isActive, [s.deactive]: !isActive})}>
+    <div className={cn(s.menuContainer, {
+      [s.active]: isOpen === true, 
+      [s.deactive]: !isOpen === false
+    })}>
       <div className={s.overlay} />
       <div className={s.menuItems}>
         <ul>
           {
-            menu.map(item => (
-              <li>
-                <a href={item.url}>{item.title}</a>
+            MENU.map(({title, to}, index) => (
+              <li key={index}>
+                <a href={to}>{title}</a>
               </li>
             ))
           }
