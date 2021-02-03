@@ -7,14 +7,14 @@ import Navbar from '../Navbar';
 function MenuHeader ({bgActive}) {
   const [isOpen, setOpen] = useState(null);
 
-  const handleClickHamburg = () => {
+  const handleClick = () => {
     setOpen(prevState => !prevState);
   };
 
   return (
     <>
-      <Menu isOpen={isOpen}/>
-      <Navbar isOpen={isOpen} bgActive={bgActive} onClickHamburg={handleClickHamburg}/>
+      <Menu isOpen={isOpen}  onClickLink={handleClick}/>
+      <Navbar isOpen={isOpen} bgActive={bgActive} onClickHamburg={handleClick}/>
     </>
   )
 }

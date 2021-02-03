@@ -145,18 +145,13 @@ const POKEMONS = [
   }
 ];
 
-function HomePage ({onChangePage}) {
-  const handleClickButton = (page) => {
-    onChangePage && onChangePage(page);
-  };
-
+function HomePage () {
   return (
     <React.Fragment>
       <MenuHeader />
       <Header 
         title="This is title" 
-        descr="This is Description!" 
-        onClickButton={handleClickButton}
+        descr="This is Description!"
       />
       <Layout id="1" title="Title 1" urlBg={urlBgForLayout}>
         <p>In the game two players face off against one another, one side playing as "blue", the other as "red" on a  3x3 grid.</p>

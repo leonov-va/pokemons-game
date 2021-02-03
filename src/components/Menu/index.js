@@ -1,12 +1,14 @@
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
+
 import s from './index.module.css';
 
-function Menu ({ isOpen }) {
+function Menu ({ isOpen, onClickLink }) {
   const MENU = [
-    {title: 'HOME', to: '#welcome'},
-    {title: 'GAME', to: '#game'},
-    {title: 'ABOUT', to: '#about'},
-    {title: 'CONTACT', to: '#contact'},
+    {title: 'HOME', to: '/'},
+    {title: 'GAME', to: '/game'},
+    {title: 'ABOUT', to: '/about'},
+    {title: 'CONTACT', to: '/contact'},
   ];
 
   return (
@@ -20,7 +22,7 @@ function Menu ({ isOpen }) {
           {
             MENU.map(({title, to}, index) => (
               <li key={index}>
-                <a href={to}>{title}</a>
+                <Link to={to} onClick={onClickLink}>{title}</Link>
               </li>
             ))
           }

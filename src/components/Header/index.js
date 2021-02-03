@@ -1,9 +1,11 @@
+import { useHistory } from 'react-router-dom';
 import s from './index.module.css';
 
-function Header ({title, descr, onClickButton}) {
+function Header ({title, descr}) {
+  const history = useHistory();
+  
   const handleClick = () => {
-    // console.log('Header component!');
-    onClickButton && onClickButton('game');
+    history.push('/game');
   };
 
   return (
