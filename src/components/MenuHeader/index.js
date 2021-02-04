@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import s from './index.module.css';
 
 import Menu from '../Menu';
 import Navbar from '../Navbar';

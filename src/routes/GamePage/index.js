@@ -155,9 +155,8 @@ function  GamePage () {
 
   const handlePokemonCard = (id) => {
     setPokemons(prevState => {
-      const idx = prevState.findIndex(element => element.id === id);
-
       // First method
+      // const idx = prevState.findIndex(element => element.id === id);
       // const array = [...prevState];
       // array[idx] = {...array[idx], active: !array[idx].active};
       // return [...array];
