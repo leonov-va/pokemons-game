@@ -31,7 +31,8 @@ const POKEMONS = [
       "right": 2,
       "bottom": 7,
       "left": 5
-    }
+    },
+    "active": false
   },
   {
     "abilities": [
@@ -58,7 +59,8 @@ const POKEMONS = [
       "right": 9,
       "bottom": "A",
       "left": "A"
-    }
+    },
+    "active": false
   },
   {
     "abilities": [
@@ -84,7 +86,8 @@ const POKEMONS = [
       "right": "A",
       "bottom": 9,
       "left": 6
-    }
+    },
+    "active": false
   },
   {
     "abilities": [
@@ -110,7 +113,8 @@ const POKEMONS = [
       "right": 4,
       "bottom": 2,
       "left": 7
-    }
+    },
+    "active": false
   },
   {
     "abilities": [
@@ -136,7 +140,8 @@ const POKEMONS = [
       "right": 6,
       "bottom": 1,
       "left": 4
-    }
+    },
+    "active": false
   }
 ];
 
@@ -151,9 +156,23 @@ function  GamePage () {
   const handlePokemonCard = (id) => {
     setPokemons(prevState => {
       const idx = prevState.findIndex(element => element.id === id);
-      const array = [...prevState];
-      array[idx] = {...array[idx], active: !array[idx].active};
-      return [...array];
+
+      // First method
+      // const array = [...prevState];
+      // array[idx] = {...array[idx], active: !array[idx].active};
+      // return [...array];
+
+      // Second method
+      const cards = prevState.map(element => {
+        if (element.id === id) {
+          return {
+            ...element,
+            active: !element.active
+          } 
+        }
+        return element;
+      });
+      return cards;
     })
   }
 
