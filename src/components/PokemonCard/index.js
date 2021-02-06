@@ -5,7 +5,6 @@ import imgBackSide from '../../assets/card-back-side.jpg';
 import s from './index.module.css';
 
 function PokemonCard ({id, type, name, values, img, isActive, onClickPokemonCard}) {
-  console.log('id: ', id);
   return (
     <div className={s.root}>
       <div className={cn(s.pokemonCard, {[s.active]: isActive})} onClick={() => onClickPokemonCard(id)}>
