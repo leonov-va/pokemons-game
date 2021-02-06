@@ -13,10 +13,10 @@ function  GamePage () {
 
   useEffect(() => {
     database.ref('pokemons').once('value', (snapshot) => {
-      setPokemons(Object.values(snapshot.val()));
+      setPokemons(snapshot.val());
     });
   }, []);
-
+  
   const handleClick = () => {
     history.push('/');
   };
@@ -25,20 +25,25 @@ function  GamePage () {
     // setPokemons(pokemons => (pokemons.map(pokemon => pokemon.id === id ? ({...pokemon, active: !pokemon.active}) : pokemon)))
 
     setPokemons(prevState => (
-      Object.entries(pokemons).reduce((acc, item) => {
+      Object.entries(prevState).reduce((acc, item) => {
         const pokemon = {...item[1]};
         const key = item[0];
         
         if (pokemon.id === id) {
           pokemon.active = !pokemon.active;
+
+          database.ref(`pokemons/${key}`).set({
+            ...pokemon,
+            active: pokemon.active
+          });
         }
     
         acc[key] = pokemon;
         return acc;
-      }, [])
+      }, {})
     ));
   }
-  
+
   return (
     <>
       <div>
@@ -46,9 +51,9 @@ function  GamePage () {
         <button onClick={handleClick}>&lt; Back to home page</button>
         <div className={s.flex}>
           {
-            pokemons.map(({id, type, name, values, img, active}) => (
+            Object.entries(pokemons).map(([key, {id, type, name, values, img, active}]) => (
               <PokemonCard
-                key={id}
+                key={key}
                 id={id}
                 type={type} 
                 name={name}
