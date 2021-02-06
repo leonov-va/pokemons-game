@@ -154,25 +154,9 @@ function  GamePage () {
   };
 
   const handlePokemonCard = (id) => {
-    setPokemons(prevState => {
-      // First method
-      // const idx = prevState.findIndex(element => element.id === id);
-      // const array = [...prevState];
-      // array[idx] = {...array[idx], active: !array[idx].active};
-      // return [...array];
-
-      // Second method
-      const cards = prevState.map(element => {
-        if (element.id === id) {
-          return {
-            ...element,
-            active: !element.active
-          } 
-        }
-        return element;
-      });
-      return cards;
-    })
+    setPokemons(pokemons => (
+      pokemons.map(pokemon => pokemon.id === id ? ({...pokemon, active: !pokemon.active}) : pokemon)
+    ))
   }
 
   return (
