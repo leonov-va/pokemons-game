@@ -4,3 +4,8 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.addNewPokemon {
+  display: block;
+  margin: 0 auto;
+}
