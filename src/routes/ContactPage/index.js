@@ -1,6 +1,8 @@
+import s from './index.module.css';
+
 function ContactsPage () {
   return (
-    <h1>This is ContactsPage component!</h1>
+    <h1 className={s.contactPage}>This is ContactsPage component!</h1>
   )
 }
 

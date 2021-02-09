@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import PokemonCard from '../../components/PokemonCard';
+import { FireBaseContext } from '../../../context/firebaseContext';
 
-import {database} from '../../service/firebase';
+import PokemonCard from '../../../components/PokemonCard';
 
 import s from './index.module.css';
 
@@ -31,27 +31,23 @@ const DATA = {
   }
 };
 
-function  GamePage () {
+function  GameStart () {
+  const firebase = useContext(FireBaseContext);
   const history = useHistory();
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    getPokemons();
+    // getPokemons();
+    firebase.getPokemonSoket((pokemons) => {
+      setPokemons(pokemons);
+    });
   }, []);
   
-  function getPokemons() {
-    database.ref('pokemons').once('value', (snapshot) => {
-      setPokemons(snapshot.val());
-    });
-  }
-
   const handleClick = () => {
     history.push('/');
   };
 
   const handlePokemonCard = (id) => {
-    // setPokemons(pokemons => (pokemons.map(pokemon => pokemon.id === id ? ({...pokemon, active: !pokemon.active}) : pokemon)))
-
     setPokemons(prevState => (
       Object.entries(prevState).reduce((acc, item) => {
         const pokemon = {...item[1]};
@@ -63,7 +59,7 @@ function  GamePage () {
     
         acc[key] = pokemon;
 
-        database.ref(`pokemons/${key}`).set(pokemon);
+        firebase.postPokemon(key, pokemon);
 
         return acc;
       }, {})
@@ -72,14 +68,12 @@ function  GamePage () {
 
   const handleAddPokemon = () => {
     const data = DATA;
-    const newKey = database.ref().child('pokemons').push().key;
-    database.ref('pokemons/' + newKey).set(data).then(() => getPokemons());
+    firebase.addPokemon(data);
   };
 
   return (
     <>
       <div>
-        {/* <button onClick={handleClick}>&lt; Back to home page</button> */}
         <button 
           className={s.addNewPokemon}  
           onClick={handleAddPokemon}
@@ -105,4 +99,4 @@ function  GamePage () {
   )
 }
 
-export default GamePage;
+export default GameStart;
