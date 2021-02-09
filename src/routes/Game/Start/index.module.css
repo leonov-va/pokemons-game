@@ -6,6 +6,22 @@
 }
 
 .addNewPokemon {
-  display: block;
-  margin: 0 auto;
+  display: inline-block;
+  min-width: 200px;
+  height: 40px;
+  margin: 0 auto 30px;
+  border: 1px solid transparent;
+  background-color: #f300b4;
+  font-size: 18px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition-property: border, background-color, color;
+  transition-duration: 300ms;
+}
+
+.addNewPokemon:hover {
+  border-color: #f300b4;
+  background-color: transparent;
+  color: #f300b4;
 }

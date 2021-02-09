@@ -1,10 +1,16 @@
+import { useState, useContext } from 'react';
 import cn from 'classnames';
 
 import s from './index.module.css';
 
-function PokemonCard ({id, type, name, values, img, isActive, minimize, className, onClickPokemonCard}) {
-  return (
-    <div className={cn(className, s.pokemonCard, {[s.active]: isActive})} onClick={() => {onClickPokemonCard(id)}}>
+function PokemonCard ({id, type, name, values, img, isActive, isSelected, minimize, className, onClickPokemonCard}) {
+	return (
+    <div 
+        className={
+            cn(className, s.pokemonCard, {[s.active]: isActive, [s.selected]: isSelected})
+        } 
+        onClick={() => onClickPokemonCard(id)}
+    >
       <div className={s.cardFront}>
           <div className={cn(s.wrap, s.front)}>
               <div className={cn(s.pokemon, s[type])}>
