@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FireBaseContext } from '../../../../context/firebaseContext';
-
-import { Link } from 'react-router-dom';
 
 import PokemonCard from '../../../../components/PokemonCard';
 import {PokemonContext} from '../../../../context/pokemonContext';
@@ -11,7 +10,8 @@ import s from './index.module.css';
 function  StartPage () {
   const [pokemons, setPokemons] = useState([]);
   const firebase = useContext(FireBaseContext);
-  const cxt = useContext(PokemonContext);
+  const pokemonContext = useContext(PokemonContext);
+  const history = useHistory();
 
   useEffect(() => {
     firebase.getPokemonSoket((pokemons) => {
@@ -22,18 +22,30 @@ function  StartPage () {
   }, []);
 
   const handleChangeSelected = (key) => {
-      setPokemons(prevState => ({
-        ...prevState,
-        [key]: {
-          ...prevState[key],
-          selected: !prevState[key].selected,
-        }
-      }))
+    const pokemon = {...pokemons[key]};
+    pokemonContext.onSelectedPokemons(key, pokemon);
+
+    setPokemons(prevState => ({
+      ...prevState,
+      [key]: {
+        ...prevState[key],
+        selected: !prevState[key].selected,
+      }
+    }))
+  }
+
+  const handleStartGameClick = () => {
+    history.push('/game/board');
   }
 
   return (
     <>
-      <button>Start Game</button>
+      <button 
+        onClick={handleStartGameClick}
+        disabled={Object.keys(pokemonContext.pokemons).length < 5}
+      >
+        Start Game
+      </button>
       <div className={s.flex}>
         {
           Object.entries(pokemons).map(([key, {id, type, name, values, img, selected}]) => (
@@ -47,7 +59,11 @@ function  StartPage () {
               img={img}
               isActive={true}
               isSelected={selected}
-              onClickCard={() => handleChangeSelected(key)}
+              onClickCard={() => {
+                if (Object.keys(pokemonContext.pokemons).length < 5 || selected){
+                  handleChangeSelected(key);
+                }
+              }}
             />
           ))
         }
