@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import s from './index.module.css';
 
-function PokemonCard ({id, type, name, values, img, isActive, isSelected, minimize, className, onClickCard}) {
+function PokemonCard ({id, type, name, values, img, isActive, isSelected, minimize, className, onClickCard, possession}) {
     const handleClickCard = () => {
         onClickCard && onClickCard(id);
     }
@@ -16,7 +16,7 @@ function PokemonCard ({id, type, name, values, img, isActive, isSelected, minimi
         >
         <div className={s.cardFront}>
             <div className={cn(s.wrap, s.front)}>
-                <div className={cn(s.pokemon, s[type])}>
+                <div className={cn(s.pokemon, s[type]), s[possession]}>
                     <div className={s.values}>
                         <div className={cn(s.count, s.top)}>{values.top}</div>
                         <div className={cn(s.count, s.right)}>{values.right}</div>
